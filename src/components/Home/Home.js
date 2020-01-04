@@ -28,11 +28,13 @@ class Home extends React.Component {
   }
 
   render() {
+    const { allDogs, allStaff, allWalks } = this.state;
+
     return (
       <div className="Home">
-        <Schedule allWalks={this.state.allWalks} />
-        <DogPen allDogs={this.state.allDogs} />
-        <StaffRoom allStaff={this.state.allStaff} />
+        <Schedule allWalks={allWalks} allDogs={allDogs} allStaff={allStaff} />
+        <DogPen allDogs={allDogs} />
+        <StaffRoom allStaff={allStaff} />
       </div>
     );
   }
