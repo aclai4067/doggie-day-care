@@ -22,7 +22,7 @@ class App extends React.Component {
     return (
       <div className="App">
         <DogPen allDogs={this.state.allDogs} />
-        <StaffRoom />
+        <StaffRoom allStaff={this.state.allStaff} />
       </div>
     );
   }
