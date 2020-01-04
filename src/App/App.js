@@ -1,28 +1,41 @@
 import React from 'react';
+import firebase from 'firebase/app';
+import 'firebase/auth';
 import './App.scss';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import DogPen from '../components/DogPen/DogPen';
-import dogData from '../helpers/data/dogData';
-import employeeData from '../helpers/data/employeeData';
-import StaffRoom from '../components/StaffRoom/StaffRoom';
+import authData from '../helpers/data/authData';
+import Auth from '../components/Auth/Auth';
+import Home from '../components/Home/Home';
+
+authData.firebaseApp();
+
 
 class App extends React.Component {
   state = {
-    allDogs: [],
-    allStaff: [],
+    authed: false,
   }
 
   componentDidMount() {
-    const allDogs = dogData.getAllDogs();
-    const allStaff = employeeData.getAllEmployees();
-    this.setState({ allDogs, allStaff });
+    this.removeListener = firebase.auth().onAuthStateChanged((user) => {
+      if (user) {
+        this.setState({ authed: true });
+      } else {
+        this.setState({ authed: false });
+      }
+    });
+  }
+
+  componentWillUnmount() {
+    this.removeListener();
   }
 
   render() {
+    const { authed } = this.state;
+
     return (
       <div className="App">
-        <DogPen allDogs={this.state.allDogs} />
-        <StaffRoom allStaff={this.state.allStaff} />
+        {
+          (authed) ? (<Home />) : (<Auth />)
+        }
       </div>
     );
   }
