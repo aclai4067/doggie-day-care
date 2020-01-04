@@ -1,0 +1,9 @@
+@import '../../styles/variables';
+
+.employeeCard{
+  background: transparent url('https://cdn2.bigcommerce.com/server2600/o4lq86x/products/223/images/452/black_plastic__04977.1373931656.386.513.png?c=2') no-repeat center;
+  background-size: contain;
+  color: $pupperYellow;
+  min-height: 10em;
+  padding-top: 3em;
+}
