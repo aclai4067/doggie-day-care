@@ -15,7 +15,7 @@ class DogPen extends React.Component {
     const dogCards = allDogs.map((dog) => <Dog key={dog.id} dog={dog} />);
 
     return (
-      <div>
+      <div id='dogPen'>
         <h2>Dogs</h2>
         <div className='row d-flex flex-wrap justify-content-around'>
           {dogCards}
