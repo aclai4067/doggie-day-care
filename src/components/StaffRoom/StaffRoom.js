@@ -12,12 +12,12 @@ class StaffRoom extends React.Component {
   render() {
     const { allStaff } = this.props;
 
-    const staffCards = allStaff.map((employee) => <Employee key={employee.id} employee={employee} />);
+    const printEmployees = allStaff.map((employee) => <Employee key={employee.id} employee={employee} />);
     return (
       <div className='staffRoom'>
         <h2>Dog Walkers</h2>
         <div className='row d-flex flex-wrap justify-content-around'>
-          {staffCards}
+          {printEmployees}
         </div>
       </div>
     );
