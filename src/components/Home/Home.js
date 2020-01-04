@@ -12,9 +12,13 @@ class Home extends React.Component {
   }
 
   componentDidMount() {
-    const allDogs = dogData.getAllDogs();
-    const allStaff = employeeData.getAllEmployees();
-    this.setState({ allDogs, allStaff });
+    dogData.getAllDogs()
+      .then((allDogs) => {
+        employeeData.getAllEmployees()
+          .then((allStaff) => {
+            this.setState({ allDogs, allStaff });
+          });
+      }).catch((err) => console.error(err));
   }
 
   render() {
