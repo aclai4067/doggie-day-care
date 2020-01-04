@@ -5,6 +5,7 @@ import './App.scss';
 import authData from '../helpers/data/authData';
 import Auth from '../components/Auth/Auth';
 import Home from '../components/Home/Home';
+import MyNav from '../components/MyNav/MyNav';
 
 authData.firebaseApp();
 
@@ -33,6 +34,7 @@ class App extends React.Component {
 
     return (
       <div className="App">
+        <MyNav authed={authed} />
         {
           (authed) ? (<Home />) : (<Auth />)
         }

@@ -14,7 +14,7 @@ class StaffRoom extends React.Component {
 
     const printEmployees = allStaff.map((employee) => <Employee key={employee.id} employee={employee} />);
     return (
-      <div className='staffRoom'>
+      <div id='staffRoom'>
         <h2>Dog Walkers</h2>
         <div className='row d-flex flex-wrap justify-content-around'>
           {printEmployees}
