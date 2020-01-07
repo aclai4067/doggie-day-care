@@ -12,6 +12,8 @@ class Schedule extends React.Component {
     allDogs: PropTypes.arrayOf(dogShape.dogShape),
     allStaff: PropTypes.arrayOf(employeeShape.employeeShape),
     cancelWalk: PropTypes.func,
+    changeEditMode: PropTypes.func,
+    setWalkToEdit: PropTypes.func,
   }
 
   render() {
@@ -20,9 +22,11 @@ class Schedule extends React.Component {
       allDogs,
       allStaff,
       cancelWalk,
+      changeEditMode,
+      setWalkToEdit,
     } = this.props;
 
-    const printWalks = allWalks.map((walk) => <Walks key={walk.id} walk={walk} allDogs={allDogs} allStaff={allStaff} cancelWalk={cancelWalk} />);
+    const printWalks = allWalks.map((walk) => <Walks key={walk.id} walk={walk} allDogs={allDogs} allStaff={allStaff} cancelWalk={cancelWalk} setWalkToEdit={setWalkToEdit} changeEditMode={changeEditMode} />);
 
     return (
       <div className='Schedule'>

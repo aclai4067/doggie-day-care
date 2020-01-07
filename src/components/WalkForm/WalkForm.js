@@ -58,14 +58,14 @@ class WalkForm extends React.Component {
           <div className='form-group'>
             <label htmlFor='dogOptions'>Select a Dog</label>
             <select className='form-control' id='dogOptions' value={this.state.dogToWalk} onChange={this.changeDog}>
-              <option value='' disabled defaultValue hidden>Select one...</option>
+              <option value='' disabled hidden>Select one...</option>
               {printAllDogOptions}
             </select>
           </div>
           <div className='form-group'>
             <label htmlFor='staffOptions'>Select a Dog Walker</label>
             <select className='form-control' id='staffOptions' value={this.state.staffForWalk} onChange={this.changeStaff}>
-              <option value='' disabled defaultValue hidden>Select one...</option>
+              <option value='' disabled hidden>Select one...</option>
               {printAllStaffOptions}
             </select>
           </div>
