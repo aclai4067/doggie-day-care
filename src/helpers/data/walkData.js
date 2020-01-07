@@ -22,4 +22,11 @@ const deleteWalk = (walkId) => axios.delete(`${baseUrl}/walks/${walkId}.json`);
 
 const addWalk = (walkObj) => axios.post(`${baseUrl}/walks.json`, walkObj);
 
-export default { getWalks, deleteWalk, addWalk };
+const updateWalk = (walkId, walkObj) => axios.put(`${baseUrl}/walks/${walkId}.json`, walkObj);
+
+export default {
+  getWalks,
+  deleteWalk,
+  addWalk,
+  updateWalk,
+};

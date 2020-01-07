@@ -14,6 +14,8 @@ class Home extends React.Component {
     allStaff: [],
     allWalks: [],
     displayForm: false,
+    walkToEdit: {},
+    editMode: false,
   }
 
   getWalks = () => {
@@ -49,6 +51,22 @@ class Home extends React.Component {
       }).catch((err) => console.error(err));
   }
 
+  editWalk = (walkId, walkObj) => {
+    walkData.updateWalk(walkId, walkObj)
+      .then(() => {
+        this.getWalks();
+        this.setState({ editMode: false, displayForm: false });
+      }).catch((err) => console.error(err));
+  }
+
+  setWalkToEdit = (walk) => {
+    this.setState({ walkToEdit: walk });
+  }
+
+  changeEditMode = (editMode) => {
+    this.setState({ editMode, displayForm: true });
+  }
+
   displayWalkForm = (e) => {
     e.preventDefault();
     this.setState({ displayForm: true });
@@ -59,20 +77,21 @@ class Home extends React.Component {
       allDogs,
       allStaff,
       allWalks,
-      scheduleWalk,
       displayForm,
+      editMode,
+      walkToEdit,
     } = this.state;
 
     return (
       <div className="Home">
         {
-          (displayForm) ? (<WalkForm allDogs={allDogs} allStaff={allStaff} scheduleWalk={this.scheduleWalk} />)
+          (displayForm) ? (<WalkForm allDogs={allDogs} allStaff={allStaff} scheduleWalk={this.scheduleWalk} editMode={editMode} walkToEdit={walkToEdit} editWalk={this.editWalk} />)
             : (
               <div>
                 <div className='scheduleBtnHolder m-3'>
                   <button className='btn btn-outline-warning m-3' onClick={this.displayWalkForm}>Schedule a Walk</button>
                 </div>
-                <Schedule allWalks={allWalks} allDogs={allDogs} allStaff={allStaff} cancelWalk={this.cancelWalk} />
+                <Schedule allWalks={allWalks} allDogs={allDogs} allStaff={allStaff} cancelWalk={this.cancelWalk} setWalkToEdit={this.setWalkToEdit} changeEditMode={this.changeEditMode} />
                 <DogPen allDogs={allDogs} />
                 <StaffRoom allStaff={allStaff} />
               </div>

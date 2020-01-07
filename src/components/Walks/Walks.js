@@ -1,5 +1,6 @@
 import './Walks.scss';
 import React from 'react';
+import moment from 'moment';
 import PropTypes from 'prop-types';
 import walkShape from '../../helpers/propz/walkShape';
 import dogShape from '../../helpers/propz/dogShape';
@@ -16,9 +17,11 @@ class Walks extends React.Component {
     allDogs: PropTypes.arrayOf(dogShape.dogShape),
     allStaff: PropTypes.arrayOf(employeeShape.employeeShape),
     cancelWalk: PropTypes.func,
+    changeEditMode: PropTypes.func,
+    setWalkToEdit: PropTypes.func,
   }
 
-  componentDidMount() {
+  getNamesById = () => {
     const { walk, allDogs, allStaff } = this.props;
     const findEmployee = allStaff.find((x) => x.id === walk.employeeId);
     const fullName = `${findEmployee.firstName} ${findEmployee.lastName}`;
@@ -27,10 +30,27 @@ class Walks extends React.Component {
     this.setState({ assignedEmployee: fullName, assignedDog: dogName });
   }
 
+  componentDidMount() {
+    this.getNamesById();
+  }
+
+  componentDidUpdate(prevProps) {
+    if ((prevProps.walk.employeeId !== this.props.walk.employeeId || prevProps.walk.dogId !== this.props.walk.dogId) && !this.props.editMode) {
+      this.getNamesById();
+    }
+  }
+
   cancelWalkEvent = (e) => {
     e.preventDefault();
     const { walk, cancelWalk } = this.props;
     cancelWalk(walk.id);
+  }
+
+  setEditMode = (e) => {
+    e.preventDefault();
+    const { changeEditMode, setWalkToEdit, walk } = this.props;
+    changeEditMode(true);
+    setWalkToEdit(walk);
   }
 
   render() {
@@ -41,8 +61,9 @@ class Walks extends React.Component {
       <div className='Walks p-2 m-3'>
         <p>Dog: {assignedDog}</p>
         <p>Walker: {assignedEmployee}</p>
-        <p>{walk.date}</p>
+        <p>{moment(walk.date).format('LL')}</p>
         <button className='btn btn-outline-light' onClick={this.cancelWalkEvent}>Cancel</button>
+        <button className='btn btn-outline-dark ml-1' onClick={this.setEditMode}>Edit</button>
       </div>
     );
   }
