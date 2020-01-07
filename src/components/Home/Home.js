@@ -6,12 +6,14 @@ import DogPen from '../DogPen/DogPen';
 import StaffRoom from '../StaffRoom/StaffRoom';
 import Schedule from '../Schedule/Schedule';
 import walkData from '../../helpers/data/walkData';
+import WalkForm from '../WalkForm/WalkForm';
 
 class Home extends React.Component {
   state = {
     allDogs: [],
     allStaff: [],
     allWalks: [],
+    displayForm: false,
   }
 
   getWalks = () => {
@@ -40,13 +42,25 @@ class Home extends React.Component {
   }
 
   render() {
-    const { allDogs, allStaff, allWalks } = this.state;
+    const {
+      allDogs,
+      allStaff,
+      allWalks,
+      displayForm,
+    } = this.state;
 
     return (
       <div className="Home">
-        <Schedule allWalks={allWalks} allDogs={allDogs} allStaff={allStaff} cancelWalk={this.cancelWalk} />
-        <DogPen allDogs={allDogs} />
-        <StaffRoom allStaff={allStaff} />
+        {
+          (displayForm) ? (<WalkForm allDogs={allDogs} allStaff={allStaff} />)
+            : (
+              <div>
+                <Schedule allWalks={allWalks} allDogs={allDogs} allStaff={allStaff} cancelWalk={this.cancelWalk} />
+                <DogPen allDogs={allDogs} />
+                <StaffRoom allStaff={allStaff} />
+              </div>
+            )
+        }
       </div>
     );
   }
