@@ -21,13 +21,23 @@ class Walks extends React.Component {
     setWalkToEdit: PropTypes.func,
   }
 
-  componentDidMount() {
+  getNamesById = () => {
     const { walk, allDogs, allStaff } = this.props;
     const findEmployee = allStaff.find((x) => x.id === walk.employeeId);
     const fullName = `${findEmployee.firstName} ${findEmployee.lastName}`;
     const findDog = allDogs.find((y) => y.id === walk.dogId);
     const dogName = findDog.name;
     this.setState({ assignedEmployee: fullName, assignedDog: dogName });
+  }
+
+  componentDidMount() {
+    this.getNamesById();
+  }
+
+  componentDidUpdate(prevProps) {
+    if ((prevProps.walk.employeeId !== this.props.walk.employeeId || prevProps.walk.dogId !== this.props.walk.dogId) && !this.props.editMode) {
+      this.getNamesById();
+    }
   }
 
   cancelWalkEvent = (e) => {

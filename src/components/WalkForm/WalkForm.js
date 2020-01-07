@@ -39,6 +39,17 @@ class WalkForm extends React.Component {
     this.setState({ dogToWalk: '', staffForWalk: '', dateOfWalk: '' });
   }
 
+  updateWalkEvent = (e) => {
+    e.preventDefault();
+    const { editWalk, walkToEdit } = this.props;
+    const updatedWalk = {
+      dogId: this.state.dogToWalk,
+      employeeId: this.state.staffForWalk,
+      date: this.state.dateOfWalk,
+    };
+    editWalk(walkToEdit.id, updatedWalk);
+  }
+
   changeDog = (e) => {
     e.preventDefault();
     this.setState({ dogToWalk: e.target.value });
@@ -55,7 +66,7 @@ class WalkForm extends React.Component {
   }
 
   render() {
-    const { allDogs, allStaff } = this.props;
+    const { allDogs, allStaff, editMode } = this.props;
 
     const printAllDogOptions = allDogs.map((dog) => <option key={dog.id} value={dog.id}>{dog.name}</option>);
 
@@ -82,7 +93,10 @@ class WalkForm extends React.Component {
             <label htmlFor='dateSelection'>Select a Date</label>
             <input type='date' className='form-control' id='dateSelection' value={this.state.dateOfWalk} onChange={this.changeDate} />
           </div>
-          <button className='btn btn-dark' onClick={this.scheduleWalkEvent}>Save</button>
+          {
+            (!editMode) ? (<button className='btn btn-dark' onClick={this.scheduleWalkEvent}>Save</button>)
+              : (<button className='btn btn-outline-dark' onClick={this.updateWalkEvent}>Update</button>)
+          }
         </form>
       </div>
     );
