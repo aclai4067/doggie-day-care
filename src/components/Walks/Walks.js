@@ -1,5 +1,6 @@
 import './Walks.scss';
 import React from 'react';
+import moment from 'moment';
 import PropTypes from 'prop-types';
 import walkShape from '../../helpers/propz/walkShape';
 import dogShape from '../../helpers/propz/dogShape';
@@ -50,7 +51,7 @@ class Walks extends React.Component {
       <div className='Walks p-2 m-3'>
         <p>Dog: {assignedDog}</p>
         <p>Walker: {assignedEmployee}</p>
-        <p>{walk.date}</p>
+        <p>{moment(walk.date).format('LL')}</p>
         <button className='btn btn-outline-light' onClick={this.cancelWalkEvent}>Cancel</button>
         <button className='btn btn-outline-dark ml-1' onClick={this.setEditMode}>Edit</button>
       </div>

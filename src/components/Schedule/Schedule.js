@@ -26,7 +26,8 @@ class Schedule extends React.Component {
       setWalkToEdit,
     } = this.props;
 
-    const printWalks = allWalks.map((walk) => <Walks key={walk.id} walk={walk} allDogs={allDogs} allStaff={allStaff} cancelWalk={cancelWalk} setWalkToEdit={setWalkToEdit} changeEditMode={changeEditMode} />);
+    const printWalks = allWalks.map((walk) => <Walks key={walk.id} walk={walk} allDogs={allDogs} allStaff={allStaff} cancelWalk={cancelWalk} setWalkToEdit={setWalkToEdit}
+      changeEditMode={changeEditMode} />);
 
     return (
       <div className='Schedule'>

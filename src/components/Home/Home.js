@@ -78,12 +78,14 @@ class Home extends React.Component {
       allStaff,
       allWalks,
       displayForm,
+      editMode,
+      walkToEdit,
     } = this.state;
 
     return (
       <div className="Home">
         {
-          (displayForm) ? (<WalkForm allDogs={allDogs} allStaff={allStaff} scheduleWalk={this.scheduleWalk} editWalk={this.editWalk} />)
+          (displayForm) ? (<WalkForm allDogs={allDogs} allStaff={allStaff} scheduleWalk={this.scheduleWalk} editMode={editMode} walkToEdit={walkToEdit} editWalk={this.editWalk} />)
             : (
               <div>
                 <div className='scheduleBtnHolder m-3'>

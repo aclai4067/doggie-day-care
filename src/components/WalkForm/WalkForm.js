@@ -1,6 +1,5 @@
 import './WalkForm.scss';
 import React from 'react';
-import moment from 'moment';
 import PropTypes from 'prop-types';
 import dogShape from '../../helpers/propz/dogShape';
 import walkShape from '../../helpers/propz/walkShape';
@@ -10,6 +9,9 @@ class WalkForm extends React.Component {
     scheduleWalk: PropTypes.func,
     allDogs: PropTypes.arrayOf(dogShape.dogShape),
     allWalks: PropTypes.arrayOf(walkShape.walkShape),
+    editWalk: PropTypes.func,
+    editMode: PropTypes.bool,
+    walkToEdit: walkShape.walkShape,
   }
 
   state = {
@@ -18,13 +20,20 @@ class WalkForm extends React.Component {
     dateOfWalk: '',
   }
 
+  componentDidMount = () => {
+    const { editMode, walkToEdit } = this.props;
+    if (editMode) {
+      this.setState({ dogToWalk: walkToEdit.dogId, staffForWalk: walkToEdit.employeeId, dateOfWalk: walkToEdit.date });
+    }
+  }
+
   scheduleWalkEvent = (e) => {
     e.preventDefault();
     const { scheduleWalk } = this.props;
     const newWalkObj = {
       dogId: this.state.dogToWalk,
       employeeId: this.state.staffForWalk,
-      date: moment(this.state.dateOfWalk).format('LL'),
+      date: this.state.dateOfWalk,
     };
     scheduleWalk(newWalkObj);
     this.setState({ dogToWalk: '', staffForWalk: '', dateOfWalk: '' });
