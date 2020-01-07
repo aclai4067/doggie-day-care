@@ -6,12 +6,14 @@ import DogPen from '../DogPen/DogPen';
 import StaffRoom from '../StaffRoom/StaffRoom';
 import Schedule from '../Schedule/Schedule';
 import walkData from '../../helpers/data/walkData';
+import WalkForm from '../WalkForm/WalkForm';
 
 class Home extends React.Component {
   state = {
     allDogs: [],
     allStaff: [],
     allWalks: [],
+    displayForm: false,
   }
 
   getWalks = () => {
@@ -39,14 +41,43 @@ class Home extends React.Component {
       }).catch((err) => console.error(err));
   }
 
+  scheduleWalk = (walkObj) => {
+    walkData.addWalk(walkObj)
+      .then(() => {
+        this.getWalks();
+        this.setState({ displayForm: false });
+      }).catch((err) => console.error(err));
+  }
+
+  displayWalkForm = (e) => {
+    e.preventDefault();
+    this.setState({ displayForm: true });
+  }
+
   render() {
-    const { allDogs, allStaff, allWalks } = this.state;
+    const {
+      allDogs,
+      allStaff,
+      allWalks,
+      scheduleWalk,
+      displayForm,
+    } = this.state;
 
     return (
       <div className="Home">
-        <Schedule allWalks={allWalks} allDogs={allDogs} allStaff={allStaff} cancelWalk={this.cancelWalk} />
-        <DogPen allDogs={allDogs} />
-        <StaffRoom allStaff={allStaff} />
+        {
+          (displayForm) ? (<WalkForm allDogs={allDogs} allStaff={allStaff} scheduleWalk={this.scheduleWalk} />)
+            : (
+              <div>
+                <div className='scheduleBtnHolder m-3'>
+                  <button className='btn btn-outline-warning m-3' onClick={this.displayWalkForm}>Schedule a Walk</button>
+                </div>
+                <Schedule allWalks={allWalks} allDogs={allDogs} allStaff={allStaff} cancelWalk={this.cancelWalk} />
+                <DogPen allDogs={allDogs} />
+                <StaffRoom allStaff={allStaff} />
+              </div>
+            )
+        }
       </div>
     );
   }
