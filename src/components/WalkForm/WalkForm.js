@@ -1,5 +1,6 @@
 import './WalkForm.scss';
 import React from 'react';
+import moment from 'moment';
 import PropTypes from 'prop-types';
 import dogShape from '../../helpers/propz/dogShape';
 import walkShape from '../../helpers/propz/walkShape';
@@ -23,7 +24,7 @@ class WalkForm extends React.Component {
     const newWalkObj = {
       dogId: this.state.dogToWalk,
       employeeId: this.state.staffForWalk,
-      date: this.state.dateOfWalk,
+      date: moment(this.state.dateOfWalk).format('LL'),
     };
     scheduleWalk(newWalkObj);
     this.setState({ dogToWalk: '', staffForWalk: '', dateOfWalk: '' });

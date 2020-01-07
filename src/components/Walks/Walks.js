@@ -38,7 +38,7 @@ class Walks extends React.Component {
     const { assignedDog, assignedEmployee } = this.state;
 
     return (
-      <div className='Walks p-2'>
+      <div className='Walks p-2 m-3'>
         <p>Dog: {assignedDog}</p>
         <p>Walker: {assignedEmployee}</p>
         <p>{walk.date}</p>
