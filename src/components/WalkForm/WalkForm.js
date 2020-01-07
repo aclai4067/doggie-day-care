@@ -57,12 +57,14 @@ class WalkForm extends React.Component {
           <div className='form-group'>
             <label htmlFor='dogOptions'>Select a Dog</label>
             <select className='form-control' id='dogOptions' value={this.state.dogToWalk} onChange={this.changeDog}>
+              <option value='' disabled defaultValue hidden>Select one...</option>
               {printAllDogOptions}
             </select>
           </div>
           <div className='form-group'>
             <label htmlFor='staffOptions'>Select a Dog Walker</label>
             <select className='form-control' id='staffOptions' value={this.state.staffForWalk} onChange={this.changeStaff}>
+              <option value='' disabled defaultValue hidden>Select one...</option>
               {printAllStaffOptions}
             </select>
           </div>
@@ -70,7 +72,7 @@ class WalkForm extends React.Component {
             <label htmlFor='dateSelection'>Select a Date</label>
             <input type='date' className='form-control' id='dateSelection' value={this.state.dateOfWalk} onChange={this.changeDate} />
           </div>
-          <button className='btn btn-dark' onClick={() => {}}>Save</button>
+          <button className='btn btn-dark' onClick={this.scheduleWalkEvent}>Save</button>
         </form>
       </div>
     );
