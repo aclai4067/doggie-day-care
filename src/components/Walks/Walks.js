@@ -15,6 +15,7 @@ class Walks extends React.Component {
     walk: walkShape.walkShape,
     allDogs: PropTypes.arrayOf(dogShape.dogShape),
     allStaff: PropTypes.arrayOf(employeeShape.employeeShape),
+    cancelWalk: PropTypes.func,
   }
 
   componentDidMount() {
@@ -26,6 +27,12 @@ class Walks extends React.Component {
     this.setState({ assignedEmployee: fullName, assignedDog: dogName });
   }
 
+  cancelWalkEvent = (e) => {
+    e.preventDefault();
+    const { walk, cancelWalk } = this.props;
+    cancelWalk(walk.id);
+  }
+
   render() {
     const { walk } = this.props;
     const { assignedDog, assignedEmployee } = this.state;
@@ -35,7 +42,7 @@ class Walks extends React.Component {
         <p>Dog: {assignedDog}</p>
         <p>Walker: {assignedEmployee}</p>
         <p>{walk.date}</p>
-        <button className='btn btn-outline-light'>Cancel</button>
+        <button className='btn btn-outline-light' onClick={this.cancelWalkEvent}>Cancel</button>
       </div>
     );
   }

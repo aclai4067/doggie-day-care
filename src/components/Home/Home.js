@@ -14,16 +14,28 @@ class Home extends React.Component {
     allWalks: [],
   }
 
+  getWalks = () => {
+    walkData.getWalks()
+      .then((allWalks) => {
+        this.setState({ allWalks });
+      }).catch((err) => console.error(err));
+  }
+
   componentDidMount() {
     dogData.getAllDogs()
       .then((allDogs) => {
         employeeData.getAllEmployees()
           .then((allStaff) => {
-            walkData.getWalks()
-              .then((allWalks) => {
-                this.setState({ allDogs, allStaff, allWalks });
-              });
+            this.getWalks();
+            this.setState({ allDogs, allStaff });
           });
+      }).catch((err) => console.error(err));
+  }
+
+  cancelWalk = (walkId) => {
+    walkData.deleteWalk(walkId)
+      .then(() => {
+        this.getWalks();
       }).catch((err) => console.error(err));
   }
 
@@ -32,7 +44,7 @@ class Home extends React.Component {
 
     return (
       <div className="Home">
-        <Schedule allWalks={allWalks} allDogs={allDogs} allStaff={allStaff} />
+        <Schedule allWalks={allWalks} allDogs={allDogs} allStaff={allStaff} cancelWalk={this.cancelWalk} />
         <DogPen allDogs={allDogs} />
         <StaffRoom allStaff={allStaff} />
       </div>

@@ -11,18 +11,24 @@ class Schedule extends React.Component {
     allWalks: PropTypes.arrayOf(walkShape.walkShape),
     allDogs: PropTypes.arrayOf(dogShape.dogShape),
     allStaff: PropTypes.arrayOf(employeeShape.employeeShape),
+    cancelWalk: PropTypes.func,
   }
 
   render() {
-    const { allWalks, allDogs, allStaff } = this.props;
+    const {
+      allWalks,
+      allDogs,
+      allStaff,
+      cancelWalk,
+    } = this.props;
 
-    const printWalks = allWalks.map((walk) => <Walks key={walk.id} walk={walk} allDogs={allDogs} allStaff={allStaff} />);
+    const printWalks = allWalks.map((walk) => <Walks key={walk.id} walk={walk} allDogs={allDogs} allStaff={allStaff} cancelWalk={cancelWalk} />);
 
     return (
       <div className='Schedule'>
         <h2>Walk Schedule</h2>
         <div className='row d-flex flex-wrap justify-content-around'>
-          {printWalks}
+          { (allWalks[0]) ? printWalks : <p>No walks scheduled</p> }
         </div>
       </div>
     );
