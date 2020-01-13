@@ -1,6 +1,8 @@
+@import '../../styles/variables';
+
 .Walks {
-  background-color: #343a4075;
-  border: 2px solid #343a40;
+  background-color: #343a4094;
+  border: 2px solid $accentGrey;
   border-radius: 15px;
   color: white;
 }

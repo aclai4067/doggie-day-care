@@ -11,8 +11,8 @@ class Dog extends React.Component {
     const { dog } = this.props;
 
     return (
-      <div className='card col-3 m-2'>
-        <img src={dog.imageUrl} className='card-img-top' alt={dog.name} />
+      <div className='card col-3 m-2 Dog'>
+        <img src={dog.imageUrl} className='card-img-top dogPic' alt={dog.name} />
         <div className='card-body'>
           <h5 className='card-title'>{dog.name}</h5>
           <p className='card-text'>{dog.description}</p>
