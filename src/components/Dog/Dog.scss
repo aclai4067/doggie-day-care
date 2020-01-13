@@ -1,0 +1,14 @@
+@import '../../styles/variables';
+
+.Dog{
+  background-color: transparent;
+  border: none;
+  color: white;
+  font-weight: bold;
+  text-shadow: 2px 2px 5px $accentGrey;
+
+  .dogPic{
+    border-radius: 999px;
+    height: 300px;
+  }
+}

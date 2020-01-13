@@ -63,7 +63,7 @@ class Walks extends React.Component {
         <p>Walker: {assignedEmployee}</p>
         <p>{moment(walk.date).format('LL')}</p>
         <button className='btn btn-outline-light' onClick={this.cancelWalkEvent}>Cancel</button>
-        <button className='btn btn-outline-dark ml-1' onClick={this.setEditMode}>Edit</button>
+        <button className='btn btn-dark ml-1' onClick={this.setEditMode}>Edit</button>
       </div>
     );
   }
