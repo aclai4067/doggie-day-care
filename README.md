@@ -12,6 +12,9 @@ This application allows the user to view, edit, add or remove dog walking servic
 ![Dogs](https://raw.githubusercontent.com/aclai4067/doggie-day-care/master/screenshots/doggie-day-care-dogs-011220.png)
 ![Dog Walkers](https://raw.githubusercontent.com/aclai4067/doggie-day-care/master/screenshots/doggie-day-care-staff-011220.png)
 
+## Demo
+[Preview the app here!](https://doggie-day-care-481cd.firebaseapp.com/)
+
 ## How to run
 * Clone down this project from [GitHub](https://github.com/aclai4067/doggie-day-care)
 * Install [http-server](https://npmjs.com/package/http-server) from npm
