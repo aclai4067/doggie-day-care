@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 
 const dogShape = PropTypes.shape({
-  id: PropTypes.string.isRequired,
+  id: PropTypes.string,
   name: PropTypes.string.isRequired,
   imageUrl: PropTypes.string.isRequired,
   owner: PropTypes.string.isRequired,

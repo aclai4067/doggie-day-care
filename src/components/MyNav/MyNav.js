@@ -3,8 +3,19 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import firebase from 'firebase/app';
 import 'firebase/auth';
+import {
+  Navbar,
+  NavbarBrand,
+  Collapse,
+  Nav,
+  NavbarToggler,
+} from 'reactstrap';
 
 class MyNav extends React.Component {
+  state = {
+    isOpen: false,
+  }
+
   static propTypes = {
     authed: PropTypes.bool,
   }
@@ -14,24 +25,26 @@ class MyNav extends React.Component {
     firebase.auth().signOut();
   }
 
+  toggle = () => {
+    this.setState({ isOpen: !this.state.isOpen });
+  }
+
   render() {
     const testAuth = this.props.authed;
-
+    const { isOpen } = this.state;
     return (
       <div className="MyNavbar">
-        <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
-          <span className="navbar-brand" href="#">Doggie Day Care</span>
-          <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggler" aria-controls="navbarToggler" aria-expanded="false" aria-label="Toggle navigation">
-            <span className="navbar-toggler-icon"></span>
-          </button>
-          <div className="collapse navbar-collapse" id="navbarToggler">
-            <ul className="navbar-nav mr-auto mt-2 mt-lg-0">
-            </ul>
+        <Navbar className="navbar navbar-expand-lg navbar-dark bg-dark">
+          <NavbarBrand href="#">Doggie Day Care</NavbarBrand>
+          <NavbarToggler onClick={this.toggle} />
+          <Collapse isOpen={isOpen} navbar>
+            <Nav className="mr-auto">
+            </Nav>
             <div className="form-inline my-2 my-lg-0">
               { (testAuth) && (<button className="nav-link btn btn-outline-warning" onClick={this.logoutEvent}>Logout</button>)}
             </div>
-          </div>
-        </nav>
+          </Collapse>
+        </Navbar>
       </div>
     );
   }
